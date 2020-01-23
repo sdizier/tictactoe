@@ -2,7 +2,6 @@ import Game from './Game';
 
 let game;
 describe('Game rules for tic tac toe', () => {
-
   beforeEach(() => {
     game = new Game();
   });
@@ -103,7 +102,7 @@ describe('Game rules for tic tac toe', () => {
       expect(game.moveTo(0, 0)).toBeTruthy();
       expect(game.moveTo(0, 0)).toBeFalsy();
       // Make sure that it's the same player since the move was invalid
-      expect(game.currentPlayer).toBe('y');
+      expect(game.currentPlayer).toBe('o');
     });
   });
 
@@ -112,27 +111,27 @@ describe('Game rules for tic tac toe', () => {
       game.moveTo(1, 1);
       expect(game.isWin('x')).toBeFalsy();
       game.moveTo(0, 0);
-      expect(game.isWin('y')).toBeFalsy();
+      expect(game.isWin('o')).toBeFalsy();
       game.moveTo(0, 2);
       expect(game.isWin('x')).toBeFalsy();
       game.moveTo(0, 1);
-      expect(game.isWin('y')).toBeFalsy();
+      expect(game.isWin('o')).toBeFalsy();
       game.moveTo(2, 0);
       expect(game.isWin('x')).toBeTruthy();
     });
 
-    it('Plays y to a win', () => {
+    it('Plays o to a win', () => {
       game.moveTo(1, 1);
       expect(game.isWin('x')).toBeFalsy();
       game.moveTo(0, 0);
-      expect(game.isWin('y')).toBeFalsy();
+      expect(game.isWin('o')).toBeFalsy();
       game.moveTo(2, 2);
       expect(game.isWin('x')).toBeFalsy();
       game.moveTo(0, 1);
-      expect(game.isWin('y')).toBeFalsy();
+      expect(game.isWin('o')).toBeFalsy();
       game.moveTo(2, 0);
       game.moveTo(0, 2);
-      expect(game.isWin('y')).toBeTruthy();
+      expect(game.isWin('o')).toBeTruthy();
     });
   });
 });

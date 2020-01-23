@@ -24,10 +24,14 @@ export default class Game {
 
   switchToNextPlayer() {
     if (this.currentPlayer === 'x') {
-      this.currentPlayer = 'y';
+      this.currentPlayer = 'o';
     } else {
       this.currentPlayer = 'x';
     }
+  }
+
+  getBoard() {
+    return this.board;
   }
 
   // Gets the last row played
