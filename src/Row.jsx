@@ -1,16 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UniqueKey from 'uuid/v1';
 
 import Column from './Column';
 
 const Row = (props) => {
-  const { key, cols, row } = props;
-  const columns = cols.map((current, i) => {
-    const columnKey = `${key}-${i}`;
-    return (<Column row={row} col={i} id={columnKey}>{current}</Column>);
-  });
+  const {
+    cols, row, handleMove,
+  } = props;
+
+  const columns = cols.map((current, i) => (
+    <Column
+      key={UniqueKey()}
+      handleMove={handleMove}
+      row={row}
+      col={i}
+    >
+      {current}
+    </Column>
+  ));
   return (
-    <div key={key} className="row">
+    <div className="row">
       {columns}
     </div>
   );
@@ -18,9 +28,9 @@ const Row = (props) => {
 
 
 Row.propTypes = {
-  key: PropTypes.number.isRequired,
   cols: PropTypes.node.isRequired,
   row: PropTypes.number.isRequired,
+  handleMove: PropTypes.func.isRequired,
 };
 
 export default Row;

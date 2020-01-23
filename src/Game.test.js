@@ -98,9 +98,9 @@ describe('Game rules for tic tac toe', () => {
   });
 
   describe('Moves can only be valid', () => {
-    it('does not allow y to move to the same location as x', () => {
-      expect(game.moveTo(0, 0)).toBeTruthy();
-      expect(game.moveTo(0, 0)).toBeFalsy();
+    it('does not allow o to move to the same location as x', () => {
+      expect(game.moveTo(0, 0).getPreviousPlayer()).toBe('x');
+      expect(game.moveTo(0, 0).getPreviousPlayer()).toBe('x');
       // Make sure that it's the same player since the move was invalid
       expect(game.currentPlayer).toBe('o');
     });

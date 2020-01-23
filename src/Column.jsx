@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import UniqueKey from 'uuid/v1';
 
-const Column = ({ id, children, row, col }) => {
-  const colValue = children.length > 0 ? children : ' ';
-  const msg = `${row}-${col}`;
+const Column = ({
+  row, col, handleMove,
+}) => {
+  const [content, setMove] = useState(' ');
+
+  function move() {
+    const game = handleMove({ row, col });
+    setMove(game.getPreviousPlayer());
+  }
+
   return (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      onClick={() => alert(msg)}
-      key={id}
+      onClick={() => move()}
+      key={UniqueKey()}
       role="button"
-      tabIndex={id}
+      tabIndex={row}
       className="col marking"
     >
-      {colValue}
+      {content}
     </div>
-);
+  );
 };
 
 
 Column.propTypes = {
-  id: PropTypes.number.isRequired,
   row: PropTypes.number.isRequired,
   col: PropTypes.number.isRequired,
-  children: PropTypes.node.isRequired,
+  handleMove: PropTypes.func.isRequired,
 };
 
 export default Column;

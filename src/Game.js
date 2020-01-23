@@ -9,17 +9,23 @@ export default class Game {
     this.isWon = false;
     this.currentPosition = [];
     this.currentPlayer = 'x';
+    this.previousPlayer = 'o';
+  }
+
+  isValidMove(row, col) {
+    const currentPiece = this.board[row][col];
+    return currentPiece === '' && !this.isWon;
   }
 
   moveTo(row, col) {
-    if (this.board[row][col] === '') {
+    if (this.isValidMove(row, col)) {
       this.addPieceToBoardByLocation(row, col, this.currentPlayer);
       this.currentPosition = [row, col];
       this.isWon = this.isWin(this.currentPlayer);
+      this.previousPlayer = this.getCurrentPlayer();
       this.switchToNextPlayer();
-      return true;
     }
-    return false;
+    return this;
   }
 
   switchToNextPlayer() {
@@ -32,6 +38,14 @@ export default class Game {
 
   getBoard() {
     return this.board;
+  }
+
+  getCurrentPlayer() {
+    return this.currentPlayer;
+  }
+
+  getPreviousPlayer() {
+    return this.previousPlayer;
   }
 
   // Gets the last row played
